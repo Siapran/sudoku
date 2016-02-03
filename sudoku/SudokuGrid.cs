@@ -1,5 +1,12 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace sudoku
 {
@@ -94,7 +101,6 @@ namespace sudoku
 		private bool GenerationWorker (int index)
 		{
 			if (index == GRID_SIZE * GRID_SIZE) {
-				PrintGrid ();
 				return true;
 			}
 
@@ -102,42 +108,29 @@ namespace sudoku
 			int j = index % GRID_SIZE;
 
 			if (_grid [i, j] != 0) {
-				PrintGrid ();
 				return GenerationWorker (index + 1);
 			}
-			Console.Out.WriteLine ();
 			int[] nums = new int[9];
 			for (int k = 0; k < nums.Length; k++) {
 				nums [k] = k + 1; 
-				Console.Out.Write (nums [k]);
 			}
-
-			Console.Out.WriteLine ();
 			Shuffle (nums);
-			for (int k = 0; k < nums.Length; k++) {
-				Console.Out.Write (nums [k]);
-			}
-			Console.Out.WriteLine ();
-
 			foreach (int num in nums) {
 				if (IsValid (num, i, j)) {
 					_grid [i, j] = num;
-					PrintGrid ();
 					if (GenerationWorker (index + 1)) {
-						PrintGrid ();
 						return true;
 					}
-				}
-			}
+                    _grid[i, j] = 0;
+                }
+            }
 			_grid [i, j] = 0;
 
 			return false;
-
 		}
 
 		public void PrintGrid ()
 		{
-			Console.Out.WriteLine ();
 			for (int i = 0; i < GRID_SIZE; i++) {
 				for (int j = 0; j < GRID_SIZE; j++) {
 					Console.Out.Write (_grid [i, j]);
@@ -147,8 +140,25 @@ namespace sudoku
 			Console.Out.Flush ();
 		}
 
+        public override String ToString()
+        {
+            String out_string = "";
+            for (int i = 0; i < GRID_SIZE; i++)
+            {
+                for (int j = 0; j < GRID_SIZE; j++)
+                {
+                    out_string += _grid[i, j];
+                }
+                out_string += "\r\n";
+            }
+            return out_string;
+        }
 
-		
-	}
+        public void Reset()
+        {
+            _grid = new int[GRID_SIZE, GRID_SIZE];
+        }
+
+    }
 }
 

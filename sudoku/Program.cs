@@ -1,5 +1,12 @@
 ﻿using System;
-using Gtk;
+using System.Windows.Forms;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace sudoku
 {
@@ -7,14 +14,7 @@ namespace sudoku
 	{
 		public static void Main (string[] args)
 		{
-			/*Application.Init ();
-			MainWindow win = new MainWindow ();
-			win.Show ();
-			Application.Run ();*/
-
-			SudokuGrid mygrid = new SudokuGrid ();
-			mygrid.GenerateGrid ();
-			mygrid.PrintGrid ();
+            Application.Run(new Form1());
 		}
 
 	}
