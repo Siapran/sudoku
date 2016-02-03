@@ -94,6 +94,7 @@ namespace sudoku
 		private bool GenerationWorker (int index)
 		{
 			if (index == GRID_SIZE * GRID_SIZE) {
+				PrintGrid ();
 				return true;
 			}
 
@@ -101,32 +102,42 @@ namespace sudoku
 			int j = index % GRID_SIZE;
 
 			if (_grid [i, j] != 0) {
+				PrintGrid ();
 				return GenerationWorker (index + 1);
 			}
-
+			Console.Out.WriteLine ();
 			int[] nums = new int[9];
 			for (int k = 0; k < nums.Length; k++) {
-				nums [k] = k + 1;
+				nums [k] = k + 1; 
+				Console.Out.Write (nums [k]);
 			}
+
+			Console.Out.WriteLine ();
 			Shuffle (nums);
+			for (int k = 0; k < nums.Length; k++) {
+				Console.Out.Write (nums [k]);
+			}
+			Console.Out.WriteLine ();
 
 			foreach (int num in nums) {
 				if (IsValid (num, i, j)) {
 					_grid [i, j] = num;
 					PrintGrid ();
 					if (GenerationWorker (index + 1)) {
+						PrintGrid ();
 						return true;
 					}
 				}
 			}
-
 			_grid [i, j] = 0;
 
 			return false;
+
 		}
 
 		public void PrintGrid ()
 		{
+			Console.Out.WriteLine ();
 			for (int i = 0; i < GRID_SIZE; i++) {
 				for (int j = 0; j < GRID_SIZE; j++) {
 					Console.Out.Write (_grid [i, j]);
@@ -135,6 +146,7 @@ namespace sudoku
 			}
 			Console.Out.Flush ();
 		}
+
 
 		
 	}
