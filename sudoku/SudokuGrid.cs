@@ -113,19 +113,19 @@ namespace sudoku
 			foreach (int num in nums) {
 				if (IsValid (num, i, j)) {
 					_grid [i, j] = num;
-
+					PrintGrid ();
 					if (GenerationWorker (index + 1)) {
 						return true;
 					}
 				}
 			}
-			_grid [i, j] = 0;
 
+			_grid [i, j] = 0;
 
 			return false;
 		}
 
-		public void printGrid ()
+		public void PrintGrid ()
 		{
 			for (int i = 0; i < GRID_SIZE; i++) {
 				for (int j = 0; j < GRID_SIZE; j++) {
@@ -133,7 +133,7 @@ namespace sudoku
 				}
 				Console.Out.WriteLine ();
 			}
-
+			Console.Out.Flush ();
 		}
 
 		

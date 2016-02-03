@@ -14,7 +14,7 @@ namespace sudoku
 
 			SudokuGrid mygrid = new SudokuGrid ();
 			mygrid.GenerateGrid ();
-			mygrid.printGrid ();
+			mygrid.PrintGrid ();
 		}
 
 	}
