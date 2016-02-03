@@ -32,5 +32,18 @@ namespace sudoku
             grid.GenerateGrid();
             this.textBox1.Text = grid.ToString();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            grid.Reset();
+            grid.FromString(this.textBox1.Text);
+            grid.GenerateGrid();
+            this.textBox1.Text = grid.ToString();
+        }
     }
 }

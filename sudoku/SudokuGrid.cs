@@ -154,6 +154,33 @@ namespace sudoku
             return out_string;
         }
 
+        public void FromString(String text)
+        {
+            int index = 0;
+            foreach(char c in text)
+            {
+                int i = index / GRID_SIZE;
+                int j = index % GRID_SIZE;
+                if (index < GRID_SIZE * GRID_SIZE)
+                {
+                    if (c >= '0' && c <= '9')
+                    {
+                        _grid[i, j] = (int)Char.GetNumericValue(c);
+                        index += 1;
+                        Console.Out.Write(_grid[i, j]);
+                    }
+                    else if (c == ' ')
+                    {
+                        _grid[i, j] = 0;
+                        index += 1;
+                        Console.Out.Write(_grid[i, j]);
+                    }
+                    else
+                        Console.Out.WriteLine();
+                }
+            }
+        }
+
         public void Reset()
         {
             _grid = new int[GRID_SIZE, GRID_SIZE];
