@@ -76,7 +76,7 @@ namespace sudoku
 
 		public void GenerateGrid ()
 		{
-			GenerationWroker (0);
+			GenerationWorker (0);
 		}
 
 		public static int[] Shuffle (int[] table)
@@ -91,7 +91,7 @@ namespace sudoku
 			return table;
 		}
 
-		private bool GenerationWroker (int index)
+		private bool GenerationWorker (int index)
 		{
 			if (index == GRID_SIZE * GRID_SIZE) {
 				return true;
@@ -101,7 +101,7 @@ namespace sudoku
 			int j = index % GRID_SIZE;
 
 			if (_grid [i, j] != 0) {
-				return GenerationWroker (index + 1);
+				return GenerationWorker (index + 1);
 			}
 
 			int[] nums = new int[9];
@@ -114,7 +114,7 @@ namespace sudoku
 				if (IsValid (num, i, j)) {
 					_grid [i, j] = num;
 
-					if (GenerationWroker (index + 1)) {
+					if (GenerationWorker (index + 1)) {
 						return true;
 					}
 				}
@@ -123,6 +123,17 @@ namespace sudoku
 
 
 			return false;
+		}
+
+		public void printGrid ()
+		{
+			for (int i = 0; i < GRID_SIZE; i++) {
+				for (int j = 0; j < GRID_SIZE; j++) {
+					Console.Out.Write (_grid [i, j]);
+				}
+				Console.Out.WriteLine ();
+			}
+
 		}
 
 		
